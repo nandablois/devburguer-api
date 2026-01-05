@@ -9,17 +9,17 @@ const authMiddleware = (request, response, next) => {
 
     const token = authToken.split(' ')[1];
 
-    console.log('Token', token)
 
     try {
         jwt.verify(token, authConfig.secret, (error, decoded) => {
             if (error) {
-                 console.log('Error', error)
-
                 throw Error();
             }
-        request.userId = decoded.id;
+
+            request.userId = decoded.id;
+            request.userIsAdmin = decoded.admin;
         });
+
     } catch (_error) {
         return response.status(401).json({ error: "Token is invalid" })
     }
