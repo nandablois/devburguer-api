@@ -14,7 +14,7 @@ class SessionController {
         const isValid = await schema.isValid(request.body, { abortEarly: false, strict: true });
 
         const emailOrPasswordIncorrect = () => {
-            return response.status(400).json({ error: " Email or password incorrect " });
+            return response.status(401).json({ error: " Email or password incorrect " });
         }
         const { email, password } = request.body;
 
@@ -41,7 +41,7 @@ class SessionController {
             return emailOrPasswordIncorrect()
         }
 
-        const token = jwt.sign({id: existingUser.id, admin: existingUser.admin}, authConfig.secret,{
+        const token = jwt.sign({id: existingUser.id, admin: existingUser.admin, name: existingUser.name}, authConfig.secret,{
             expiresIn: authConfig.expiresIn,
         })
     
