@@ -35,6 +35,9 @@ importers:
       sequelize:
         specifier: ^6.37.7
         version: 6.37.7(pg-hstore@2.3.4)(pg@8.16.3)
+      stripe:
+        specifier: ^20.3.1
+        version: 20.3.1(@types/node@24.10.1)
       uuid:
         specifier: ^13.0.0
         version: 13.0.0
@@ -874,6 +877,15 @@ packages:
   strip-ansi@7.1.2:
     resolution: {integrity: sha512-gmBGslpoQJtgnMAvOVqGZpEz9dyoKTCzy2nfz/n8aIFhN/jCE/rCmcxabB6jOOHV+0WNnylOxaxBQPSvcWklhA==}
     engines: {node: '>=12'}
+
+  stripe@20.3.1:
+    resolution: {integrity: sha512-k990yOT5G5rhX3XluRPw5Y8RLdJDW4dzQ29wWT66piHrbnM2KyamJ1dKgPsw4HzGHRWjDiSSdcI2WdxQUPV3aQ==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@types/node': '>=16'
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
 
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
@@ -1801,6 +1813,10 @@ snapshots:
   strip-ansi@7.1.2:
     dependencies:
       ansi-regex: 6.2.2
+
+  stripe@20.3.1(@types/node@24.10.1):
+    optionalDependencies:
+      '@types/node': 24.10.1
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
