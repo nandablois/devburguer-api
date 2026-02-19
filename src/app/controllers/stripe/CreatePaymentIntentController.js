@@ -26,7 +26,6 @@ class CreatePaymentIntentController {
         ),
     });
 
-    
     try {
       schema.validateSync(request.body, { abortEarly: false, strict: true });
     } catch (err) {
@@ -37,20 +36,17 @@ class CreatePaymentIntentController {
 
     const amount = calculateOrderAmount(products);
 
-    try {
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount,
-        currency: "brl",
-        automatic_payment_methods: { enabled: true },
-      });
-
-      return response.json({ clientSecret: paymentIntent.client_secret });
-    } catch (err) {
-      console.error("Erro ao criar PaymentIntent:", err);
-      return response
-        .status(500)
-        .json({ error: "Erro ao processar pagamento" });
-    }
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount,
+      currency: "brl",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+    response.json({
+      clientSecret: paymentIntent.client_secret,
+      dpmCheckerLink: `https://dashboard.stripe.com/settings/payment_methods/review?transaction_id=${paymentIntent.id}`,
+    });
   }
 }
 
