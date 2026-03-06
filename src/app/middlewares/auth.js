@@ -27,6 +27,6 @@ const authMiddleware = (request, response, next) => {
     return next();
 
 }
-
+    
 export default authMiddleware;
 
